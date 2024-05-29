@@ -2,12 +2,10 @@
 
 dfx start --clean --background
 dfx deploy
- flutter doctor -v
-flutter pub get
-flutter devices
-flutter run
+flutter doctor -v
 flutter clean
 flutter pub get
+flutter devices
 flutter run
 flutter run -d chrome
  
