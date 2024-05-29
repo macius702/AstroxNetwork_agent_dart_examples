@@ -1,3 +1,16 @@
+# Useful commands
+
+dfx start --clean --background
+dfx deploy
+ flutter doctor -v
+flutter pub get
+flutter devices
+flutter run
+flutter clean
+flutter pub get
+flutter run
+flutter run -d chrome
+ 
 # counter_new
 
 A flutter sample app that connects to local canister
