@@ -88,14 +88,27 @@ class Counter {
       print("actor: $actor");
       print("CounterMethod: ${CounterMethod}");
       print("CounterMethod.getValue: ${CounterMethod.getValue}");
-      
-      var res = await actor?.getFunc(CounterMethod.getValue)!([]);
-      if (res != null) {
-        return (res as BigInt).toInt();
+
+      ActorMethod? func = actor?.getFunc(CounterMethod.getValue);
+      print("getFunc result: $func");
+
+      if (func != null) {
+        var res = await func([]);
+        print("Function call result: $res");
+
+        if (res != null) {
+          return (res as BigInt).toInt();
+        } else {
+          print("Function call returned null");
+        }
+      } else {
+        print("getFunc returned null");
       }
-      throw "Cannot get count but $res";
+
+      throw "Cannot get count";
     } catch (e) {
+      print("Caught error: $e");
       rethrow;
     }
-  }
+  }  
 }
