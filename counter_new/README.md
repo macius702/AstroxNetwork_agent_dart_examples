@@ -1,3 +1,7 @@
+# TODO
+
+host static Flutter chrome on ICP as frontend canister
+
 # Useful commands
 
 dfx start --clean --background
@@ -8,6 +12,8 @@ flutter pub get
 flutter devices
 flutter run
 flutter run -d chrome
+
+flutter build web --profile --dart-define=Dart2jsOptimization=O0 --source-maps
  
 # counter_new
 
