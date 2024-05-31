@@ -1,9 +1,12 @@
 # TODO
 
-host static Flutter chrome on ICP as frontend canister
+
+- [x] Host static Flutter chrome on ICP as frontend canister
+- [ ] Check Android talking to playground canister
 
 # Useful commands
 
+```
 dfx start --clean --background
 dfx deploy
 flutter doctor -v
@@ -13,7 +16,13 @@ flutter devices
 flutter run
 flutter run -d chrome
 
+
+# build and deploy in playground mainnet: !!! 
+dart generate_config.dart
 flutter build web --profile --dart-define=Dart2jsOptimization=O0 --source-maps
+dfx deploy --playground 
+# (can be the second time working) and after playground expires  then: rm -rf .dfx/playground)
+```
  
 # counter_new
 

@@ -1,6 +1,10 @@
+import 'dart:io';
+import 'dart:convert';
 import 'package:agent_dart/agent_dart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'config.dart' show playground_backendCanisterId, playground_frontend_url;
+
 
 // import Counter class with canister call
 import 'counter.dart';
@@ -50,15 +54,27 @@ class _MyHomePageState extends State<MyHomePage> {
     // initialize counter, change canister id here 
      //10.0.2.2  ? private const val BASE_URL = "http://10.0.2.2:4944"
 
-    String url;
-    if (kIsWeb) {
-      url = 'http://localhost:4944'; 
-    } else {
-      url = 'http://10.0.2.2:4944'; // default to localhost for other platforms
+    // String url;
+    // var backendCanisterId;
+    // if (kIsWeb) {
+    //   print("kIsWeb");
+    //   url = 'http://localhost:4944'; 
+  
 
-    }
+    // } else {
+    //     print("not kIsWeb");
 
-    counter = Counter(canisterId: 'bkyz2-fmaaa-aaaaa-qaaaq-cai', url: url);    // set agent when other paramater comes in like new Identity
+    //   // url = 'http://10.0.2.2:4944'; // default to localhost for other platforms
+
+    //   // url = 'https://mdwwn-niaaa-aaaab-qabta-cai.ic0.app:4944';
+
+    // }
+
+
+    // url = 'https://z7chj-7qaaa-aaaab-qacbq-cai.icp0.io:4944';
+    // backendCanisterId = 'ocpcu-jaaaa-aaaab-qab6q-cai';
+    
+    counter = Counter(canisterId: playground_backendCanisterId, url: playground_frontend_url);    // set agent when other paramater comes in like new Identity
     await counter?.setAgent(newIdentity: identity);
     await getValue();
   }
