@@ -73,8 +73,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // url = 'https://z7chj-7qaaa-aaaab-qacbq-cai.icp0.io:4944';
     // backendCanisterId = 'ocpcu-jaaaa-aaaab-qab6q-cai';
-    
-    counter = Counter(canisterId: playground_backendCanisterId, url: playground_frontend_url);    // set agent when other paramater comes in like new Identity
+
+    var backendCanisterId, frontend_url;
+    if (kIsWeb) {
+      print("kIsWeb");
+      frontend_url = playground_frontend_url;
+      backendCanisterId = playground_backendCanisterId;
+
+    } else {
+      print("NOT kIsWeb");
+
+      frontend_url = 'https://icp-api.io';
+      backendCanisterId = playground_backendCanisterId;
+    }
+
+
+    counter = Counter(canisterId: backendCanisterId, url: frontend_url);    // set agent when other paramater comes in like new Identity
     await counter?.setAgent(newIdentity: identity);
     await getValue();
   }
