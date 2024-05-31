@@ -18,6 +18,7 @@ flutter run -d chrome
 
 
 # build and deploy in playground mainnet: !!! 
+dfx deploy --playground 
 dart generate_config.dart
 flutter build web --profile --dart-define=Dart2jsOptimization=O0 --source-maps
 dfx deploy --playground 
