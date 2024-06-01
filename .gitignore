@@ -1,3 +1,5 @@
 tool/
 ..github/
 counter_new/lib/config.dart
+
+counter_new/web_front_end.sh

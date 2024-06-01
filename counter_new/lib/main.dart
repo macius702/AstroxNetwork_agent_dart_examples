@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:agent_dart/agent_dart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'config.dart' show playground_backendCanisterId, playground_frontend_url;
+import 'config.dart' show backendCanisterId;
 
 
 // import Counter class with canister call
@@ -37,6 +37,15 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
+
+// enum for mode of execution: playground, mainnet or local     
+  enum Mode {
+    playground,
+    local,
+    mainnet
+  }
+
+
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
@@ -74,8 +83,21 @@ class _MyHomePageState extends State<MyHomePage> {
     // url = 'https://z7chj-7qaaa-aaaab-qacbq-cai.icp0.io:4944';
     // backendCanisterId = 'ocpcu-jaaaa-aaaab-qab6q-cai';
 
-    var frontend_url = 'https://icp-api.io';
-    var backendCanisterId = playground_backendCanisterId;
+    Mode mode = Mode.playground;
+
+  var frontend_url;
+
+  if (mode == Mode.playground) {
+    frontend_url = 'https://icp-api.io';
+  } else if (mode == Mode.local) {
+    if (kIsWeb  ) {
+      frontend_url = 'http://localhost:4944';
+    } else {  // for android emulator
+      frontend_url = 'http://10.0.2.2:4944';  
+    }
+  } else if (mode == Mode.mainnet) {
+  }
+
 
 
     counter = Counter(canisterId: backendCanisterId, url: frontend_url);    // set agent when other paramater comes in like new Identity

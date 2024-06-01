@@ -1,22 +1,44 @@
 import 'dart:io';
 import 'dart:convert';
 
-void main() async {
-  var filePath = '.dfx/playground/canister_ids.json';
+void main(List<String> args) async {
+
+  if (args.length != 1) {
+    print('You must pass exactly one argument.');
+    return;
+  }
+
+  String mode = args[0];
+  print("Generating config file for $mode mode.");
+
+  if (mode != 'playground' && mode != 'local' && mode != 'network') {
+    print('Invalid argument. Must be one of: playground, local, mainnet');
+    return;
+  }
+
+  var filePath = '.dfx/$mode/canister_ids.json';
   var file = File(filePath);
 
   if (await file.exists()) {
     var content = await file.readAsString();
     var jsonContent = jsonDecode(content);
-    var backendCanisterId = jsonContent['counter']['playground'];
-    var frontendCanisterId = jsonContent['frontend']['playground'];
+    var backendCanisterId = jsonContent['counter'][mode];
+    var frontend_canister_id = jsonContent['frontend'][mode];
 
-    var url = 'https://$frontendCanisterId.icp0.io';
+    //to file web_front_end.sh print https://<frontend_canister_id>.icp0.io/
 
-    var outputFile = File('lib/config.dart');
+    var outputFile = File('web_front_end.sh');
     await outputFile.writeAsString('''
-const playground_frontend_url = '$url';
-const playground_backendCanisterId = '$backendCanisterId';
+export FRONTEND_CANISTER_ID=$frontend_canister_id
+    ''');
+
+
+
+
+
+    outputFile = File('lib/config.dart');
+    await outputFile.writeAsString('''
+const backendCanisterId = '$backendCanisterId';
     ''');
 
     print('File generated successfully.');
