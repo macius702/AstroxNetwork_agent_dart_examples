@@ -52,5 +52,9 @@ then
     source web_front_end.sh
     xdg-open https://$FRONTEND_CANISTER_ID.ic0.app &
     flutter run --release -d emulator-5554 &
+elif [ "$1" == "local" ]
+then
+    flutter run --release -d chrome &
+    flutter run --release -d emulator-5554 & # (cd build/web && http-server  -p 8765)
 fi
 

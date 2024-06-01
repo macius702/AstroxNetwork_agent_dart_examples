@@ -39,6 +39,9 @@ export FRONTEND_CANISTER_ID=$frontend_canister_id
     outputFile = File('lib/config.dart');
     await outputFile.writeAsString('''
 const backendCanisterId = '$backendCanisterId';
+enum Mode {    playground,    local,    network  }
+Mode mode = Mode.$mode;
+
     ''');
 
     print('File generated successfully.');

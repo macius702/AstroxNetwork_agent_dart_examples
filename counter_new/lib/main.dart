@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:agent_dart/agent_dart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'config.dart' show backendCanisterId;
+import 'config.dart' show backendCanisterId, Mode, mode;
 
 
 // import Counter class with canister call
@@ -38,12 +38,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-// enum for mode of execution: playground, mainnet or local     
-  enum Mode {
-    playground,
-    local,
-    mainnet
-  }
+
 
 
 
@@ -83,7 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // url = 'https://z7chj-7qaaa-aaaab-qacbq-cai.icp0.io:4944';
     // backendCanisterId = 'ocpcu-jaaaa-aaaab-qab6q-cai';
 
-    Mode mode = Mode.playground;
 
   var frontend_url;
 
@@ -95,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {  // for android emulator
       frontend_url = 'http://10.0.2.2:4944';  
     }
-  } else if (mode == Mode.mainnet) {
+  } else if (mode == Mode.network) {
   }
 
 
